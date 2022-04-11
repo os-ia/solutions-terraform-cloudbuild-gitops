@@ -1,1 +1,1 @@
-project="infrastructure-as-code-346909"
+project = "infrastructure-as-code-346909"
