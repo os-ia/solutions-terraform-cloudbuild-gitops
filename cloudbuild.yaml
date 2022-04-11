@@ -47,7 +47,6 @@ steps:
           done
         fi
 
-  # [START tf-plan]
   - id: "tf plan"
     name: "hashicorp/terraform:1.0.0"
     entrypoint: "sh"
@@ -71,8 +70,7 @@ steps:
             cd ../../
           done
         fi
-  # [END tf-plan]
-  # [START tf-apply]
+
   - id: "tf apply"
     name: "hashicorp/terraform:1.0.0"
     entrypoint: "sh"
@@ -88,4 +86,27 @@ steps:
           echo "*******************************************************************************"
         fi
 
-# [END tf-apply]
+  - id: "tf destroy"
+    name: "hashicorp/terraform:1.0.0"
+    entrypoint: "sh"
+    args:
+      - "-c"
+      - |
+        if [ "$BRANCH_NAME" = "destroy" ]; then
+          for dir in environments/*/
+          do
+            cd ${dir}
+            env=${dir%*/}
+            env=${env#*/}
+            echo ""
+            echo "*************** TERRAFOM DESTROY ******************"
+            echo "******* At environment: ${env} ********"
+            echo "************************************************"
+            terraform destroy || exit 1
+            cd ../../
+          done
+        else
+          echo "***************************** SKIPPING DESTROYING *****************************"
+          echo "Branch '$BRANCH_NAME' is not used to destroy stuff"
+          echo "*******************************************************************************"
+        fi
