@@ -102,7 +102,7 @@ steps:
             echo "*************** TERRAFOM DESTROY ******************"
             echo "******* At environment: ${env} ********"
             echo "************************************************"
-            terraform destroy || exit 1
+            terraform destroy -auto-approve || exit 1
             cd ../../
           done
         else
