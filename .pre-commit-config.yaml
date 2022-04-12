@@ -1,0 +1,33 @@
+repos:
+  - repo: https://github.com/pre-commit/pre-commit-hooks
+    rev: v4.2.0
+    hooks:
+      - id: check-added-large-files
+      - id: check-executables-have-shebangs
+      - id: check-merge-conflict
+      - id: check-symlinks
+      - id: check-vcs-permalinks
+      - id: check-yaml
+      - id: destroyed-symlinks
+      - id: detect-private-key
+      - id: end-of-file-fixer
+      - id: mixed-line-ending
+      - id: trailing-whitespace
+  - repo: https://github.com/antonbabenko/pre-commit-terraform
+    rev: v1.64.1
+    hooks:
+      # - id: checkov
+      # - id: terraform_docs
+      - id: terraform_fmt
+      - id: terraform_providers_lock
+      # - id: terraform_tflint
+      # - id: terraform_tfsec
+      # - id: terraform_validate
+      - id: terragrunt_fmt
+      # - id: terragrunt_validate
+      # - id: terrascan
+      # - id: infracost_breakdown
+      #   verbose: true
+      #   args:
+      #     - --args=--path=./environments/dev
+      #     - --hook-config='.currency == "EUR"'
